@@ -1,0 +1,94 @@
+
+	<div class="divider">
+
+	<p><font size="5" color="green"><b>Dr. {{doctor_desc.name}}</b></font></p>
+
+	<table cellpadding="5" cellspacing="5">
+		<tr>
+			<td colspan="4"><hr></td>
+		</tr>
+		<tr>
+			<td colspan="2" width="300">Speciality: {{doctor_desc.professions[0].speciality}}</td>
+			<td colspan="2" width="300">Experience: {{doctor_desc.professions[0].experience}} (Years)</td>
+		</tr>
+		<tr>
+			<td colspan="2">Charges: {{doctor_desc.professions[0].fee}}</td>
+			<td colspan="2"></td>
+		</tr>
+		<tr>
+			<td colspan="4"><hr></td>
+		</tr>
+		<tr>
+			<td colspan="2">Email: {{doctor_desc.email}}</td>
+			<td colspan="2">Mobile: {{doctor_desc.mobile}}</td>
+		</tr>
+		<tr>
+			<td colspan="2">Alternate Contact: {{doctor_desc.alternate_mobile}}</td>
+			<td colspan="2">Address: {{doctor_desc.address}}, {{doctor_desc.city}} ({{doctor_desc.state}})</td>
+		</tr>
+		<tr>
+			<td colspan="4"><hr></td>
+		</tr>
+		<tr>
+			<td align="left" colspan="2"><a href="" ng-click="showbox = !showbox"><font color="red">Take Appointment</font></a>
+			</td>
+			
+			<td colspan="2">
+			
+				<form name="confirmForm" ng-submit="takeAppointment(doctor_desc.id, patient_date)">
+				
+				  <div ng-hide="true" ng-show="showbox">
+				  	
+					<p ng-hide="message.appointment != null">Your Prefer Date</p>
+
+					<input type="text" data-provide='datepicker' placeholder="Prefered Date" required="" name="patient_date" ng-model="patient_date" ng-hide="message.appointment != null" data-date-format="dd-mm-yyyy"/>
+
+					<button type="submit" ng-hide="message.appointment != null">Confirm</button>
+
+				
+					<p><font color="green">{{message.appointment}}</font></p>
+					
+				  </div>
+				</form>
+
+			</td>
+		</tr>
+	</table>
+	</div><br>
+
+
+	<div class="panel panel-primary">
+		<div class="divider">
+			<div>
+				<h4>Comments</h4>
+				<textarea class="form-control" required="" ng-model="content" placeholder="Your Comments"></textarea>
+				<div class="clearfix"></div><br>
+				<button class="btn btn-default pull-right" ng-click="createFeedback(doctor_desc.id,content)">Submit</button>
+			</div>
+			<div>
+				<table class="table"> 
+					<tr><br>
+						<th width="200"><font size="5">Name</font></th>
+						<th><font size="5">Comments</font></th>
+						<th><font size="5">Action</font></th>
+					</tr>
+					<tr ng-repeat="feedbacks in doctor_desc.doctor_feedbacks">
+						<td><b>{{feedbacks.patient.name}}</b></td>
+						<td  ng-init="showbox[$index] = true">
+							<textarea class="form-control" ng-disabled="showbox[$index]" ng-model="feedbacks.content"></textarea>
+							<button ng-hide="showbox[$index]" ng-click="updateFeedback(feedbacks.id, feedbacks.content)">Update</button>
+						</td>
+						<td ng-if="current_id == feedbacks.patient.id">
+							<a href="" ng-click="showbox[$index] = false">Edit</a>
+							<a href="" ng-click="deleteFeedback(feedbacks.id)">Delete</a>
+						</td>
+					</tr>
+					<tr ng-if="doctor_desc.doctor_feedbacks == ''">
+						<td colspan="2">No Record Found</td>
+					</tr>	
+					<tr ng-if="doctor_desc.id == doctor_desc.doctor_feedbacks.patients">
+					</tr>		
+				</table>
+			</div>
+		</div>
+	</div>

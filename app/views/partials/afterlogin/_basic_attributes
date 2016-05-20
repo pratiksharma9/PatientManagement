@@ -1,0 +1,7 @@
+
+<%if user_signed_in?%>
+
+<p style="color:green; font-size: 150%; float: left;"> Welcome, <%= current_user.name.capitalize %> (<%= current_user.role %>)</p>
+
+
+<% end %>

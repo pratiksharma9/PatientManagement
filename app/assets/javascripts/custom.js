@@ -1,0 +1,1 @@
+$('.pickdateindex').datepicker({format: 'dd-mm-yyyy'});

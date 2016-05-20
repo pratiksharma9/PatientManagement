@@ -1,0 +1,120 @@
+<div class="table-responsive">
+
+	<form name="myForm">
+
+		<table align="center" ng-init="showtextbox = true">
+			<tr>	
+				<td colspan="2"><center><h2><strong>Profile</strong></h2></center> </td><br>
+			</tr>
+
+			<tr>	
+				<td width="200"><strong>Name</strong></td>
+				<td>
+					<input type="text" class="profile-txtbox" ng-model="doctor_record.name" name="name" required="" ng-disabled="showtextbox"/> 
+					<p ng-show="myForm.name.$invalid" >Name is required.</p>
+				</td>	
+			</tr>
+			
+			<tr>
+				<td><strong>Email</strong></td>
+				<td>
+					<input type="email" class="profile-txtbox" ng-model="doctor_record.email" name="email" required="" ng-disabled="showtextbox"/>
+					<p ng-show="myForm.email.$invalid" >Email is required.</p>
+				</td>	
+			</tr>
+
+			<tr>
+				<td><strong>Gender</strong></td>
+				<td>
+					<input type="text" class="profile-txtbox" ng-model="doctor_record.gender" name="gender" required="" ng-disabled="showtextbox"/>			
+					<p ng-show="myForm.gender.$invalid" >Gender is required.</p>
+				</td>	
+			</tr>
+
+			<tr>
+				<td><strong>Date Of Birth</strong></td>
+				<td>
+					<input type="text" class="profile-txtbox" ng-model="doctor_record.dob" name="dob" required=""  ng-disabled="showtextbox"/>
+					<p ng-show="myForm.dob.$invalid" >Date Of Birth is required.</p>
+				</td>	
+			</tr>
+
+			<tr>
+				<td><strong>Mobile</strong></td>
+				<td>
+					<input type="text" class="profile-txtbox" ng-model="doctor_record.mobile" name="mobile" required="" ng-disabled="showtextbox"/>			
+					<p ng-show="myForm.mobile.$invalid" >Mobile is required.</p>
+				</td>	
+			</tr>
+
+			<tr>
+				<td><strong>Alternate Mobile</strong></td>
+				<td>
+					<input type="text" class="profile-txtbox" ng-model="doctor_record.alternate_mobile" name="alternatemobile" required="" ng-disabled="showtextbox"/>	
+					<p ng-show="myForm.alternatemobile.$invalid" >Alternate Mobile is required.</p>		
+				</td>	
+			</tr>
+
+			<tr>
+				<td><strong>Address</strong></td>
+				<td>
+					<input type="text" class="profile-txtbox" ng-model="doctor_record.address" name="address" required="" ng-disabled="showtextbox"/>			
+					<p ng-show="myForm.address.$invalid" >Address is required.</p>		
+				</td>	
+			</tr>
+
+			<tr>
+				<td><strong>Locality</strong></td>
+				<td>
+					<input type="text" class="profile-txtbox" ng-model="doctor_record.locality" name="locality" required="" ng-disabled="showtextbox"/>	
+					<p ng-show="myForm.locality.$invalid"> Locality is Required </p>		
+				</td>	
+			</tr>
+
+			<tr>
+				<td><strong>City</strong></td>
+				<td>
+					<input type="text" class="profile-txtbox" ng-model="doctor_record.city" name="city" required="" ng-disabled="showtextbox"/>	
+					<p ng-show="myForm.city.$invalid"> City is Required </p>		
+				</td>	
+			</tr>
+
+			<tr>
+				<td><strong>State</strong></td>
+				<td>
+					<input type="text" class="profile-txtbox" ng-model="doctor_record.state" name="state" required="" ng-disabled="showtextbox"/>
+					<p ng-show="myForm.state.$invalid"> State is Required </p>	
+				</td>	
+			</tr>
+			
+			<tr>
+				<td><strong>Country</strong></td>
+				<td>
+					<input type="text" class="profile-txtbox" ng-model="doctor_record.country" name="country" required="" ng-disabled="showtextbox"/>			
+					<p ng-show="myForm.country.$invalid"> Country is Required </p>	
+				</td>	
+			</tr>
+
+			<tr>
+				<td><strong>Pincode</strong></td>
+				<td>
+					<input type="text" class="profile-txtbox" ng-model="doctor_record.pincode" name="pincode" required="" ng-disabled="showtextbox"/>	
+					<p ng-show="myForm.pincode.$invalid"> Pincode is Required </p>		
+				</td>	
+			</tr>
+			<tr>
+				<td></td>
+				<td>
+				<br>
+					<a href="" ng-click="showtextbox = !showtextbox">Edit Profile</a>
+					<input type="submit" value="Update Profile" ng-click="docUpdateRec(doctor_record, myForm)" ng-disabled="showtextbox" />{{}}
+					<!-- <a href="/patients/{{doctor_record.id}}/edit">Edit Profile</a> <br> -->
+				</td>
+			</tr>
+
+		</table>
+
+	</form>
+
+</div>
+

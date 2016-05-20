@@ -1,0 +1,108 @@
+<div class="panel panel-primary">
+
+	<table align="center" cellpadding="5" cellspacing="5">
+		<tr>	
+			<td colspan="2">	<center><h2><b>Profile</b></h2></center> </td>
+		</tr>
+
+		<tr>	
+			<td colspan="2"><hr></td>
+		</tr>
+
+		<tr>	
+			<td width="200"><b>Name</b></td>
+			<td>
+				{{patient_record.name}} 
+			</td>	
+		</tr>
+		
+		<tr>
+			<td><b>Email</b></td>
+			<td>
+				{{patient_record.email}}
+			</td>	
+		</tr>
+
+		<tr>
+			<td><b>Gender</b></td>
+			<td>
+				{{patient_record.gender}}
+			</td>	
+		</tr>
+
+		<tr>
+			<td><b>Date Of Birth</b></td>
+			<td>
+				{{patient_record.dob}}
+			</td>	
+		</tr>
+
+		<tr>
+			<td><b>Mobile</b></td>
+			<td>
+				{{patient_record.mobile}}
+			</td>	
+		</tr>
+
+		<tr>
+			<td><b>Alternate Mobile</b></td>
+			<td>
+				{{patient_record.alternate_mobile}}
+			</td>	
+		</tr>
+
+		<tr>
+			<td><b>Address</b></td>
+			<td>
+				{{patient_record.address}}
+			</td>	
+		</tr>
+
+		<tr>
+			<td><b>Locality</b></td>
+			<td>
+				{{patient_record.locality}}
+			</td>	
+		</tr>
+
+		<tr>
+			<td><b>City</b></td>
+			<td>
+				{{patient_record.city}}
+			</td>	
+		</tr>
+
+		<tr>
+			<td><b>State </b></td>
+			<td>
+				{{patient_record.state}}
+			</td>	
+		</tr>
+		
+		<tr>
+			<td><b>Country</b> </td>
+			<td>
+				{{patient_record.country}}
+			</td>	
+		</tr>
+
+		<tr>
+			<td><b>Pincode</b> </td>
+			<td>
+				{{patient_record.pincode}}
+			</td>	
+		</tr>
+		<tr>	
+			<td colspan="2"><hr></td>
+		</tr>
+
+		<tr>
+			<td></td>
+			<td>
+				<a href="/patients/{{patient_record.id}}/edit">Edit Profile</a> <br><br>
+			</td>
+		</tr>
+	</table>
+
+</div>
+

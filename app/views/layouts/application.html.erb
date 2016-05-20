@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html ng-app="PatientManagement">
+ <html>
+	<head>
+		<title>PatientManagement</title>
+		<%= stylesheet_link_tag    'application', media: 'all' %>
+		<%= javascript_include_tag 'application' %>
+		<base href="/">
+		<%= csrf_meta_tags %>
+	</head>
+	
+	<body>	
+		
+		<div class="header">
+			 <%= render "layouts/menu"%>
+		</div>
+
+		<div class="flasherror">
+			<center><p class="notice"><%= notice %></p>
+			<p class="alert"><%= alert %></p></center>
+		</div>
+		
+		<div class="content">
+			<div class="sub-content">
+				<div class="basic-attribute-overflow">
+					<%= render "partials/afterlogin/basic_attributes" %>
+				</div>
+				<div>
+					<%= yield %>
+				</div>
+			</div>
+		</div>
+		
+
+		<div class="footer" >
+			
+		</div>	 
+       
+	</body>
+</html>

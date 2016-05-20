@@ -1,0 +1,22 @@
+.headwidth
+{
+	width: 200px;
+}
+
+.profile-txtbox:disabled
+{
+	border: none;
+	background: transparent;
+}
+
+.divider
+{
+	width: 50%;  
+	margin-top: 50px; 
+	margin-left: 25%;
+}
+
+.basic-attribute-overflow
+{
+	overflow: auto;
+}

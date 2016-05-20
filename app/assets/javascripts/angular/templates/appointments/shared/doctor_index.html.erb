@@ -1,0 +1,52 @@
+<table class="table" ng-if="allAppointments.message == 'ForDoctor'">
+	<tr>
+		<th ng-click="type = 'id'; sort = !sort" >Appointment Id</th>
+		<th>Your Name</th>
+		<th>Patient Name</th>
+		<th>Appointment Date</th>
+		<th>Appointment Time</th>
+		<th>Action</th>
+		<th ng-click="type = 'status'; sort = !sort">Status</th>
+	</tr>
+
+	<tr ng-repeat="appointment in allAppointments.record  | orderBy:'-id' | orderBy:type:sort ">
+		<td>{{appointment.id}}</td>
+		<td><a href="doctors/{{appointment.doctor.id}}/profile">Dr. {{appointment.doctor.name}}</a></td>
+		<td>{{appointment.patient.name}}</td>
+		<td>{{appointment.patient_date}}</td>
+		<td>
+			
+			<a href="#" ng-if="appointment.doctor_confirm_time == null && appointment.status != 'Canceled'" ng-click="showbox($index)">Confirm Appointment </a>
+			
+			{{appointment.doctor_confirm_time}}
+			<a href="#" ng-if="appointment.doctor_confirm_time" ng-click="showbox($index)">| Edit</a>
+
+			<br>
+			<select ng-show="showbox[$index]" ng-model="time" required="">
+					<option value="10:00 AM">10:00 AM</option>
+					<option value="11:00 AM">11:00 AM</option>
+					<option value="12:00 PM">12:00 PM</option>
+					<option value="01:00 PM">01:00 PM</option>
+					<option value="02:00 PM">02:00 PM</option>
+					<option value="03:00 PM">03:00 PM</option>
+					<option value="04:00 PM">04:00 PM</option>
+					<option value="05:00 PM">05:00 PM</option>
+					<option value="06:00 PM">06:00 PM</option>
+					<option value="07:00 PM">07:00 PM</option>
+					<option value="08:00 PM">08:00 PM</option>
+			</select>
+
+			<input type="submit" ng-show="showbox[$index]" ng-click="appointmentConfirmByDoctor(appointment.id, time)" ng-hide="true" value="Update" />
+			
+		</td>
+				
+		<td> 
+		   <a href="#" ng-click="cancelByDoctor(appointment.id)" ng-if="appointment.status != 'Canceled'">Cancel</a> 
+			
+		</td>
+
+		<td ng-style="appointment.status == 'Canceled' ? {'color': 'red'} : (appointment.status == 'Pending' ? {'color': 'blue'} : {'color': 'green'})" >
+		{{appointment.status}}</td>
+	</tr>
+
+</table>

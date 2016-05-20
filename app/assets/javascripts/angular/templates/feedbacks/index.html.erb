@@ -1,0 +1,18 @@
+<div><br>
+		<table class="table">
+			<tr>
+				<th><font size="5">Name</font></th>
+				<th><font size="5">Comments</font></th>
+			</tr>
+			
+			<tr ng-repeat="doctor in doctor_feedbacks">
+				<td><b>{{doctor.patient.name}}</b></td>
+				<td>{{doctor.content}} </td>
+			</tr>
+			
+			<tr ng-if="doctor_desc.doctor_feedbacks == ''">
+				<td colspan="2">No Record Found</td>
+			</tr>	
+			
+		</table>
+</div>

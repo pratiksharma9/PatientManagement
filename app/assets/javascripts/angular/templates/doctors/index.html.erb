@@ -1,0 +1,45 @@
+
+<center><h3>Doctor's</h3></center><br>
+
+<div  class="panel panel-primary">
+
+	<table cellpadding="8" cellspacing="8" align="center" >
+		<tr>
+			<td colspan="5"><hr></td>
+		</tr>
+
+		<tr>
+			<th class="headwidth">Name</th>
+			<th class="headwidth">Speciality</th>
+			<th class="headwidth">Charges</th>
+			<th class="headwidth">Actions</th>
+		</tr>
+
+		<tr>
+			<td colspan="5"><hr></td>
+		</tr>
+
+		<tr ng-repeat="doc in doctors_lists" >
+			<td><a href="/doctors/{{doc.id}}"><font color="red">Dr. {{doc.name}}</font></a></td>
+			<td>{{doc.professions[0].speciality}}</td>
+			<td>{{doc.professions[0].fee}}</td>
+			<td><a href="" ng-click="showbox($index)"><font color="red">Take Appointment</font></a></td>
+		
+			<td ng-hide="true" ng-show="showbox[$index]">
+				<form name="confirmForm" ng-submit="takeAppointment(doc.id, patient_date)">
+					
+					<input type="text" required="" data-provide="datepicker" name="patient_date" placeholder="Prefer Date" ng-model="patient_date" class="pickdateindex" data-date-format="dd-mm-yyyy" ng-hide="message.appointment"/>
+
+					<button ng-hide="message.appointment" type="submit">Confirm</button>
+
+					<p>{{message.appointment}}</p>
+				</form>
+			</td>
+		</tr>
+
+		<tr>
+			<td colspan="5"><hr></td>
+		</tr>
+	</table> 
+</div>
+

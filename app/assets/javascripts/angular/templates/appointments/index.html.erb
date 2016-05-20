@@ -1,0 +1,19 @@
+<center><h3>New Requests</h3></center><br>
+
+<div class="panel panel-primary">
+	<div>
+
+		<ng-include src="'angular/templates/appointments/shared/patient_index.html'">
+		</ng-include>
+		
+		<ng-include src="'angular/templates/appointments/shared/doctor_index.html'">
+		</ng-include>
+			
+	</div>
+
+	<table ng-show="allAppointment.record.length == 0" align="center">
+		<tr>
+			<td colspan="7"><font color="red">No Record Found</font></td>
+		</tr>
+	</table>
+</div>
