@@ -1,9 +1,9 @@
 
-<center><h3>Doctor's</h3></center><br>
+<center><h3><b>Doctor's</b></h3></center><br>
 
 <div  class="panel panel-primary">
 
-	<table cellpadding="8" cellspacing="8" align="center" >
+	<table cellpadding="8" cellspacing="8" align="center">
 		<tr>
 			<td colspan="5"><hr></td>
 		</tr>
@@ -11,7 +11,7 @@
 		<tr>
 			<th class="headwidth">Name</th>
 			<th class="headwidth">Speciality</th>
-			<th class="headwidth">Charges</th>
+			<th class="headwidth">Charges (In Rs.)</th>
 			<th class="headwidth">Actions</th>
 		</tr>
 
@@ -19,24 +19,36 @@
 			<td colspan="5"><hr></td>
 		</tr>
 
-		<tr ng-repeat="doc in doctors_lists" >
-			<td><a href="/doctors/{{doc.id}}"><font color="red">Dr. {{doc.name}}</font></a></td>
-			<td>{{doc.professions[0].speciality}}</td>
-			<td>{{doc.professions[0].fee}}</td>
-			<td><a href="" ng-click="showbox($index)"><font color="red">Take Appointment</font></a></td>
-		
-			<td ng-hide="true" ng-show="showbox[$index]">
-				<form name="confirmForm" ng-submit="takeAppointment(doc.id, patient_date)">
-					
-					<input type="text" required="" data-provide="datepicker" name="patient_date" placeholder="Prefer Date" ng-model="patient_date" class="pickdateindex" data-date-format="dd-mm-yyyy" ng-hide="message.appointment"/>
+		<tr ng-repeat="doctor in doctors" height="60">
+			<td><a href="/doctors/{{doctor.id}}"><font color="red">Dr. {{doctor.name}}</font></a></td>
+			
+			<td>
+				<div ng-if="doctor.professions == ''"><font color="red">N/A</font></div>
+				<div ng-repeat="profession in doctor.professions"> 
+					<span>{{profession.speciality}}</span>
+				</div>
+			</td>
+			<td>
+				<div ng-if="doctor.professions == ''"><font color="red">N/A</font></div>
+				<div ng-repeat="profession in doctor.professions"> 
+					<span>{{profession.fee | currency:'&#8377;'}}</span>
+				</div>
+			</td>
 
+				<td><a href="" ng-click="showBox($index)" ng-if="doctor.professions != ''"><font color="red">Take Appointment</font></a></td>
+		
+			<td ng-hide="true" ng-show="showBox[$index]">
+				<form name="confirmForm" ng-submit="takeAppointment(doctor.id, patient_date)">
+					
+					<input type="text" required="" data-provide="datepicker" data-date-format="dd/mm/yyyy" data-date-start-date="1d" data-date-end-date="+3m" name="patient_date" placeholder="Prefer Date" ng-model="patient_date" ng-hide="message.appointment"/>
+					
 					<button ng-hide="message.appointment" type="submit">Confirm</button>
 
 					<p>{{message.appointment}}</p>
 				</form>
 			</td>
 		</tr>
-
+		
 		<tr>
 			<td colspan="5"><hr></td>
 		</tr>

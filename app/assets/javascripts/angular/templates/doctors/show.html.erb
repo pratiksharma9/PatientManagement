@@ -1,33 +1,34 @@
+<div class="divider">
 
-	<div class="divider">
+	<p><font size="5" color="green"><b>Dr. {{doctor.name}}</b></font></p>
 
-	<p><font size="5" color="green"><b>Dr. {{doctor_desc.name}}</b></font></p>
-
-	<table cellpadding="5" cellspacing="5">
+	<table cellpadding="5" cellspacing="5" class="table">
 		<tr>
-			<td colspan="4"><hr></td>
+			<td colspan="3"><h4>Profession Details</h4></td>
 		</tr>
 		<tr>
-			<td colspan="2" width="300">Speciality: {{doctor_desc.professions[0].speciality}}</td>
-			<td colspan="2" width="300">Experience: {{doctor_desc.professions[0].experience}} (Years)</td>
+			<th> Specialty <th>
+			<th> Experience <th>
+			<th> Charges <th>
+		</tr>
+		<tr ng-repeat="profession in doctor.professions">
+			<td colspan="2">{{profession.speciality}}</td>
+			<td colspan="2">{{profession.experience}} Year</td>
+			<td colspan="2">{{profession.fee | currency:'&#8377;'}}</td>
+		</tr>
+	</table>
+	<br>
+	<table cellpadding="5" cellspacing="5" class="table">
+		<tr>
+			<td colspan="3"><h4>Contact Details</h4></td>
 		</tr>
 		<tr>
-			<td colspan="2">Charges: {{doctor_desc.professions[0].fee}}</td>
-			<td colspan="2"></td>
+			<td colspan="2">Email: {{doctor.email}}</td>
+			<td colspan="2">Mobile: {{doctor.mobile}}</td>
 		</tr>
 		<tr>
-			<td colspan="4"><hr></td>
-		</tr>
-		<tr>
-			<td colspan="2">Email: {{doctor_desc.email}}</td>
-			<td colspan="2">Mobile: {{doctor_desc.mobile}}</td>
-		</tr>
-		<tr>
-			<td colspan="2">Alternate Contact: {{doctor_desc.alternate_mobile}}</td>
-			<td colspan="2">Address: {{doctor_desc.address}}, {{doctor_desc.city}} ({{doctor_desc.state}})</td>
-		</tr>
-		<tr>
-			<td colspan="4"><hr></td>
+			<td colspan="2">Alternate Contact: {{doctor.alternate_mobile}}</td>
+			<td colspan="2">Address: {{doctor.address}}, {{doctor.city}} ({{doctor.state}})</td>
 		</tr>
 		<tr>
 			<td align="left" colspan="2"><a href="" ng-click="showbox = !showbox"><font color="red">Take Appointment</font></a>
@@ -35,13 +36,13 @@
 			
 			<td colspan="2">
 			
-				<form name="confirmForm" ng-submit="takeAppointment(doctor_desc.id, patient_date)">
+				<form name="confirmForm" ng-submit="takeAppointment(doctor.id, patient_date)">
 				
-				  <div ng-hide="true" ng-show="showbox">
+					<div ng-hide="true" ng-show="showbox">
 				  	
 					<p ng-hide="message.appointment != null">Your Prefer Date</p>
 
-					<input type="text" data-provide='datepicker' placeholder="Prefered Date" required="" name="patient_date" ng-model="patient_date" ng-hide="message.appointment != null" data-date-format="dd-mm-yyyy"/>
+					<input type="text" data-provide="datepicker" data-date-format="dd/mm/yyyy" data-date-start-date="1d" data-date-end-date="+3m" placeholder="Prefered Date" required="" name="patient_date" ng-model="patient_date" ng-hide="message.appointment != null"/>
 
 					<button type="submit" ng-hide="message.appointment != null">Confirm</button>
 
@@ -54,41 +55,43 @@
 			</td>
 		</tr>
 	</table>
-	</div><br>
+</div>
 
 
-	<div class="panel panel-primary">
-		<div class="divider">
-			<div>
-				<h4>Comments</h4>
-				<textarea class="form-control" required="" ng-model="content" placeholder="Your Comments"></textarea>
+<div class="panel panel-primary">
+	<div class="divider">
+		<div>
+			<h4>Comments</h4>
+			<form name="confirmForm" ng-submit="createFeedback(doctor.id,content)">
+				<textarea class="form-control" required="" ng-model="content" placeholder="Your Comments" required=""></textarea>
 				<div class="clearfix"></div><br>
-				<button class="btn btn-default pull-right" ng-click="createFeedback(doctor_desc.id,content)">Submit</button>
-			</div>
-			<div>
-				<table class="table"> 
-					<tr><br>
-						<th width="200"><font size="5">Name</font></th>
-						<th><font size="5">Comments</font></th>
-						<th><font size="5">Action</font></th>
-					</tr>
-					<tr ng-repeat="feedbacks in doctor_desc.doctor_feedbacks">
-						<td><b>{{feedbacks.patient.name}}</b></td>
-						<td  ng-init="showbox[$index] = true">
-							<textarea class="form-control" ng-disabled="showbox[$index]" ng-model="feedbacks.content"></textarea>
-							<button ng-hide="showbox[$index]" ng-click="updateFeedback(feedbacks.id, feedbacks.content)">Update</button>
-						</td>
-						<td ng-if="current_id == feedbacks.patient.id">
-							<a href="" ng-click="showbox[$index] = false">Edit</a>
-							<a href="" ng-click="deleteFeedback(feedbacks.id)">Delete</a>
-						</td>
-					</tr>
-					<tr ng-if="doctor_desc.doctor_feedbacks == ''">
-						<td colspan="2">No Record Found</td>
-					</tr>	
-					<tr ng-if="doctor_desc.id == doctor_desc.doctor_feedbacks.patients">
-					</tr>		
-				</table>
-			</div>
+				<button class="btn btn-default pull-right" ng-click="">Submit</button>
+			</form>	
+		</div>
+		<div>
+			<table class="table"> 
+				<tr><br>
+					<th width="200"><font size="5">Name</font></th>
+					<th><font size="5">Comments</font></th>
+					<th><font size="5">Action</font></th>
+				</tr>
+				<tr ng-repeat="feedback in doctor.doctor_feedbacks">
+					<td><b>{{feedback.patient.name}}</b></td>
+					<td  ng-init="showBox[$index] = true">
+						<textarea class="form-control" ng-disabled="showBox[$index]" ng-model="feedback.content"></textarea>
+						<button ng-hide="showBox[$index]" ng-click="updateFeedback(feedback.id, feedback.content)">Update</button>
+					</td>
+					<td ng-if="currentUserId == feedback.patient.id">
+						<a href="" ng-click="showBox($index)">Edit</a>
+						<a href="" ng-click="deleteFeedback(feedback.id)">Delete</a>
+					</td>
+				</tr>
+				<tr ng-if="doctor.doctor_feedbacks == ''">
+					<td colspan="2">No Record Found</td>
+				</tr>	
+				<tr ng-if="doctor.id == doctor.doctor_feedbacks.patients">
+				</tr>		
+			</table>
 		</div>
 	</div>
+</div>

@@ -1,70 +1,50 @@
 class AppointmentsController < ApplicationController
-
 	respond_to :html, :json
 	
 	# Show All
 	def index
-		respond_with do |format|
-			format.json {render :json => {record: current_user.send(current_user.role.downcase + '_appointments').as_json(include: [:doctor, :patient]), message: "For"+current_user.role, id: current_user.id}}
-			format.html
+		if(current_user.has_role? :Patient) || (current_user.has_role? :Doctor)
+			respond_with(record: current_user.send(appointments_according_role).as_json(include: [:doctor, :patient]), for: current_user.roles.first.name)
 		end
 	end
 
 	#ids
 	def update
 
-		if (params[:status] == "Pending")
-
+		# Now we will use send method that convert a string to executeable Method
+		# Pending(Date), Confirmed(Time), Cancelled(both patient and User), 
+		if ((current_user.has_role? :Patient) && params[:status] == "Pending")
+		
 			option = current_user.patient_appointments.create(patient_appointment_params)
 			msg = "Appointment Successful awating for Confirmation";
 		
-		elsif (params[:status] == "Confirmed")
+		elsif ((current_user.has_role? :Doctor) && params[:status] == "Confirmed")
 
-			@updated = current_user.doctor_appointments.find(params[:id]).update(appointment_params)
+			updated = current_user.doctor_appointments.find(params[:id]).update(appointment_params)
 			msg = 'Time Successfully Updated'
 		
-		elsif (params[:status] == "Canceled")
+		elsif (params[:status] == "Canceled") && ((current_user.has_role? :Patient) || (current_user.has_role? :Doctor))
 
-			# Now we will use send method that convert a string to Method  
-			according = current_user.role.downcase + '_appointments'; 
-			# here we will merge according
-			@status_updated = current_user.send(according).find(params[:id]).update(appointment_params)
-
+			# here we will merge user_type_appointments
+			status_updated = current_user.send(appointments_according_role).find(params[:id]).update(appointment_params)
 			msg = "Cancelled"
 
-		elsif (params[:status] == "EditDate")
-			
-			editdate = current_user.send(current_user.role.downcase + '_appointments').find(params[:id]).update(edit_params)
+		elsif ((current_user.has_role? :Patient) && (params[:status] == "EditDate"))
+
+			# here we will merge user_type_appointments
+			editdate = current_user.send(appointments_according_role).find(params[:id]).update(edit_params)
 			msg = "Appointment Date Has Been Updated"
-
-		elsif
-
-			msg = "No Pending Confirm Cancelled"
-						
+			
+		else
+			msg = "Getting Problem"		
 		end
 
-		respond_to do |format|
+		respond_with do |format|
 			format.json {render json: {appointment: msg} }
 			format.html
 		end
-		
-	end
-
-	# Doctor Description
-	def show
-		# reserved For Doctor Description in angular
-	end
-
-	# doctor Search
-	def search
-		
-	end
-
-	#ids
-	def destroy
 
 	end
-
 
 	private
 	def appointment_params
@@ -77,5 +57,9 @@ class AppointmentsController < ApplicationController
 
 	def edit_params
 		params.permit(:patient_date)
+	end
+
+	def appointments_according_role
+		current_user.roles.first.name.downcase + '_appointments';
 	end
 end

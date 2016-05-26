@@ -1,18 +1,28 @@
-<div><br>
-		<table class="table">
+<div class="row">
+	<div class="col-md-2"></div>
+	<div class="col-md-8"><br>
+		<table class="table table-hover">
 			<tr>
 				<th><font size="5">Name</font></th>
 				<th><font size="5">Comments</font></th>
 			</tr>
-			
-			<tr ng-repeat="doctor in doctor_feedbacks">
-				<td><b>{{doctor.patient.name}}</b></td>
-				<td>{{doctor.content}} </td>
+		
+			<tr ng-repeat="feedback in feedbacks">
+				<td><b>{{feedback.patient.name}}</b></td>
+				<td>{{feedback.content}} </td>
 			</tr>
-			
-			<tr ng-if="doctor_desc.doctor_feedbacks == ''">
-				<td colspan="2">No Record Found</td>
+		
+			<tr ng-if="feedbacks == ''">
+				<td colspan="2"><font color="red">No Feedback Yet</font></td>
 			</tr>	
 			
 		</table>
+	<div>
+	<div class="col-md-2">
+	   
+  </div>
 </div>
+
+
+
+        

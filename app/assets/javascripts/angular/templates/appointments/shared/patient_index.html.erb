@@ -1,34 +1,38 @@
-	<table class="table" ng-if="allAppointments.message == 'ForPatient'">
-		<tr>
-			<th ng-click="type = 'id'; sort = !sort" >Appointment Id</th>
-			<th>Your Name</th>
-			<th>Doctor Name</th>
-			<th>Appointment Date</th>
-			<th>Appointment Time</th>
-			<th ng-click="type = 'status'; sort = !sort">Status</th>
-			<th>Action</th>
-		</tr>
+<table class="table">
+	<tr>
+		<th class="cursor-prop" ng-click="type = 'id'; sort = !sort"> Appointment Id </th>
+		<th>Your Name</th>
+		<th>Doctor Name</th>
+		<th class="cursor-prop" ng-click="type = 'patient_date'; sort = !sort">Appointment Date</th>
+		<th>Appointment Time</th>
+		<th class="cursor-prop" ng-click="type = 'status'; sort = !sort">Status</th>
+		<th>Action</th>
+	</tr>
 
-		<tr ng-repeat="appointment in allAppointments.record | orderBy:'-id' | orderBy:type:sort ">
-			
-			<td>{{appointment.id}}</td>
-			
-			<td><a href="/patients/{{appointment.patient.id}}"><font color="green">{{appointment.patient.name}}</font></a></td>
-			
-			<td><a href="/doctors/{{appointment.doctor.id}}"><font color="blue">Dr. {{appointment.doctor.name}}</font></a></td>
-			
-			<td>
-				<p ng-hide="showbox[$index]">{{appointment.patient_date}}</p>
-				<input type="text" data-date-format="yyyy-mm-dd" data-provide='datepicker' size="8" ng-model="appointment.patient_date" ng-show="showbox[$index]" required="" />
-				<button ng-click="editdate(appointment.id, appointment.patient_date)" ng-show="showbox[$index]">Update</button>
-			</td>
-			
-			<td>{{appointment.doctor_confirm_time}}</td>
-			
-			<td ng-style="appointment.status == 'Canceled' ? {'color': 'red'} : (appointment.status == 'Pending' ? {'color': 'blue'} : {'color': 'green'})" >{{appointment.status}}</td>
-			<td>
+	<tr ng-repeat="appointment in appointments | orderBy:'-patient_date' | orderBy:type:sort ">
+		
+		<td>{{appointment.id}}</td>
+		
+		<td><a href="/patients/{{appointment.patient.id}}"><font color="green">{{appointment.patient.name}}</font></a></td>
+		
+		<td><a href="/doctors/{{appointment.doctor.id}}"><font color="blue">Dr. {{appointment.doctor.name}}</font></a></td>
+		
+		<td>
+			<form ng-submit="editdate(appointment.id, appointment.patient_date)">
+			<p ng-hide="showbox[$index]">{{appointment.patient_date}}</p>
+			<input type="text" data-provide="datepicker" data-date-format="dd/mm/yyyy" data-date-start-date="1d" data-date-end-date="+3m" size="8" ng-model="appointment.patient_date" ng-show="showbox[$index]" required=""/>
+			<button ng-show="showbox[$index]">Update</button>
+			</button>
+		</td>
+		
+		<td>{{appointment.doctor_confirm_time}}</td>
+		
+		<td ng-style="appointment.status == 'Canceled' ? {'color': 'red'} : (appointment.status == 'Pending' ? {'color': 'blue'} : {'color': 'green'})" >{{appointment.status}}</td>
+		<td>
+			<span ng-if="(currentDate | date: 'yyyy-MM-dd') < appointment.patient_date">
 				<a href="" ng-if="appointment.status != 'Canceled' && appointment.status != 'Confirmed'" ng-click="cancelByDoctor(appointment.id)">Cancel</a>
 				<a href="" ng-if="appointment.status != 'Canceled' && appointment.status != 'Confirmed'" ng-click="showbox($index)">| Edit</a>
-			</td>
-		</tr>
-	</table>
+			</span>
+		</td>
+	</tr>
+</table>

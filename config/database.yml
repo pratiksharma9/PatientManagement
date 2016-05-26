@@ -28,21 +28,3 @@ test:
 production:
   <<: *default
   database: patient_production
-
-
-
-#~ development:
-  #~ adapter: postgresql
-  #~ encoding: unicode
-  #~ database: patient_management
-  #~ pool: 5
-  #~ username: myapp
-  #~ password: 12345
-#~ 
-#~ test:
-  #~ adapter: postgresql
-  #~ encoding: unicode
-  #~ database: patient_management
-  #~ pool: 5
-  #~ username: myapp
-  #~ password: 12345

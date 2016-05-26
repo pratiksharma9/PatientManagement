@@ -11,8 +11,11 @@
 
     <tr>
       <div class="field">
-        <td><%= f.label :email %></td>
-        <td><%= f.email_field :email, autofocus: true %></td>
+        <td width="200"><%= f.label :email %></td>
+        <td width="180">
+					<%= f.email_field :email, autofocus: true, disabled: true %>
+					<p id="user_email_error" class="sign-up-error"></p>
+				</td>
       </div>
     </tr>
 
@@ -23,28 +26,37 @@
       <% end %>
     </td>
   </tr>
-
+	
+	<tr>
+    <div class="field">
+      <td><%= f.label :current_password %><br> </td>
+      <td>
+				<%= f.password_field :current_password, autocomplete: "off" %>
+				<p id="user_current_password_error" class="sign-up-error"></p>
+			</td>
+    </div>
+  </tr>
+	
   <tr>
     <div class="field">
       <td><%= f.label :password %> <br></td>
-      <td><%= f.password_field :password, autocomplete: "off" %></td>
+      <td>
+				<%= f.password_field :password, autocomplete: "off" %>
+				<p id="user_password_error" class="sign-up-error"></p>
+      </td>
     </div>
   </tr>
 
   <tr>
     <div class="field">
       <td><%= f.label :password_confirmation %></td>
-      <td><%= f.password_field :password_confirmation, autocomplete: "off" %></td>
+      <td>
+				<%= f.password_field :password_confirmation, autocomplete: "off" %>
+				<p id="user_password_confirmation_error" class="sign-up-error"></p>
+      </td>
     </div>
   </tr>
-
-  <tr>
-    <div class="field">
-      <td><%= f.label :current_password %><br> </td>
-      <td><%= f.password_field :current_password, autocomplete: "off" %></td>
-    </div>
-  </tr>
-
+	
   <tr>
     <div class="actions">
       <td colspan="2"><p class="pull-right"><%= f.submit "Update" %></p></td>

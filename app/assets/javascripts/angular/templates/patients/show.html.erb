@@ -1,108 +1,95 @@
-<div class="panel panel-primary">
-
-	<table align="center" cellpadding="5" cellspacing="5">
+<div class="col-md-4"></div>
+<div class="panel panel-primary col-md-4">
+	
+	<table align="center" cellpadding="5" cellspacing="5" class="table">
 		<tr>	
-			<td colspan="2">	<center><h2><b>Profile</b></h2></center> </td>
-		</tr>
-
-		<tr>	
-			<td colspan="2"><hr></td>
+			<td colspan="2"><center><h2><b>Profile</b></h2></center></td>
 		</tr>
 
 		<tr>	
 			<td width="200"><b>Name</b></td>
 			<td>
-				{{patient_record.name}} 
+				{{patient.name}} 
 			</td>	
 		</tr>
 		
 		<tr>
 			<td><b>Email</b></td>
 			<td>
-				{{patient_record.email}}
+				{{patient.email}}
 			</td>	
 		</tr>
 
 		<tr>
 			<td><b>Gender</b></td>
 			<td>
-				{{patient_record.gender}}
+				{{patient.gender}}
 			</td>	
 		</tr>
 
 		<tr>
 			<td><b>Date Of Birth</b></td>
 			<td>
-				{{patient_record.dob}}
+				{{patient.dob}}
 			</td>	
 		</tr>
 
 		<tr>
 			<td><b>Mobile</b></td>
 			<td>
-				{{patient_record.mobile}}
+				{{patient.mobile}}
 			</td>	
 		</tr>
 
 		<tr>
 			<td><b>Alternate Mobile</b></td>
 			<td>
-				{{patient_record.alternate_mobile}}
+				{{patient.alternate_mobile}}
 			</td>	
 		</tr>
 
 		<tr>
 			<td><b>Address</b></td>
 			<td>
-				{{patient_record.address}}
-			</td>	
-		</tr>
-
-		<tr>
-			<td><b>Locality</b></td>
-			<td>
-				{{patient_record.locality}}
+				{{patient.address}}
 			</td>	
 		</tr>
 
 		<tr>
 			<td><b>City</b></td>
 			<td>
-				{{patient_record.city}}
+				{{patient.city}}
 			</td>	
 		</tr>
 
 		<tr>
 			<td><b>State </b></td>
 			<td>
-				{{patient_record.state}}
+				{{patient.state}}
 			</td>	
 		</tr>
 		
 		<tr>
 			<td><b>Country</b> </td>
 			<td>
-				{{patient_record.country}}
+				{{patient.country}}
 			</td>	
 		</tr>
 
 		<tr>
 			<td><b>Pincode</b> </td>
 			<td>
-				{{patient_record.pincode}}
+				{{patient.pincode}}
 			</td>	
 		</tr>
-		<tr>	
-			<td colspan="2"><hr></td>
-		</tr>
-
+		
 		<tr>
 			<td></td>
 			<td>
-				<a href="/patients/{{patient_record.id}}/edit">Edit Profile</a> <br><br>
+				<a href="/patients/{{patient.id}}/edit">Edit Profile</a> <br><br>
 			</td>
 		</tr>
 	</table>
 
 </div>
-
+<div class="col-md-4"></div>

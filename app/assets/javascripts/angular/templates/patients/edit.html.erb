@@ -1,121 +1,149 @@
-<form ng-submit="updateRec" name="myForm"> 
-	
-	<table align="center" cellpadding="5" cellspacing="5">
-		<tr>	
-			<td colspan="2"><center><h2><b>Edit Profile</b></h2></center> </td>
-		</tr>
+<div class="panel col-md-12">
+	<div class="col-md-3"></div>
+	<div class="col-md-5">
+		<form name="myForm" novalidate> 
+			
+			<table align="center" cellpadding="5" cellspacing="5" class="table">
+				<tr>
+					<td colspan="2"><center><h2><b>Edit Profile</b></h2></center> </td>
+				</tr>
 
-		<tr>	
-			<td colspan="2"><hr></td>
-		</tr>
+				<tr>	
+					<td width="200"><b>Name</b></td>
+					<td>
+						<input type="text" name="name" ng-model="patient.name" required="" ng-pattern="/[a-zA-Z]$/"/ class="form-control">
+						<div ng-show="myForm.$submitted || myForm.name.$touched" class="profile-error" >
+							<p ng-show="myForm.name.$error.required"> Name required </p>
+							<p ng-show="myForm.name.$error.pattern"> Only Character Allowed </p>
+						</div>
+					</td>	
+				</tr>
+				
+				<tr>
+					<td><b>Gender</b></td>
+					<td>
+						<input type="radio"	name="gender" value="Male" ng-model="patient.gender" required=""/>Male
+						<input type="radio"	name="gender" value="Female" ng-model="patient.gender" />Female
+						<div ng-show="myForm.$submitted || myForm.gender.$touched" class="profile-error">
+							<p ng-show="myForm.gender.$error.required"> Select Gender </p>
+						</div>
+					</td>
+				</tr>
 
-		<tr>	
-			<td width="200"><b>Name</b></td>
-			<td>
-				<input type="text" ng-model="patient_record.name" name="namechk" required/>
-				<p ng-show="myForm.namechk.$invalid" >Name is required.</p>
-			</td>	
-		</tr>
-		
-		<tr>
-			<td><b>Email</b></td>
-			<td>
-				<input type="text" ng-model="patient_record.email" name="email" required/>
-				<p ng-show="myForm.email.$invalid">Email is required.</p>
-			</td>	
-		</tr>
+				<tr>
+					<td><b>Date Of Birth</b></td>
+					<td>
+						<input type="text" data-provide="datepicker" data-date-format="dd/mm/yyyy" data-date-start-date="-50y" data-date-end-date="0d" ng-model="patient.dob" name="dob" required="" class="form-control"/>
+						<div ng-show="myForm.$submitted || myForm.dob.$touched" class="profile-error">
+							<p ng-show="myForm.dob.$error.required"> Date Of Birth required </p>
+						</div>	
+					</td>	
+				</tr>
 
-		<tr>
-			<td><b>Gender</b></td>
-			<td>
-				<input type="text" ng-model="patient_record.gender" name="gender" required/>
-			</td>	
-		</tr>
+				<tr>
+					<td><b>Mobile</b></td>
+					<td>
+						<input type="text" ng-model="patient.mobile" name="mobile" minlength="10" maxlength="10" required="" ng-pattern="/[0-9]$/" class="form-control"/>
+						<div ng-show="myForm.$submitted || myForm.mobile.$touched" class="profile-error">
+							<p ng-show="myForm.mobile.$error.required"> Mobile required. </p>
+							<p ng-show="myForm.mobile.$error.pattern"> Only Numbers allowed </p>
+							<p ng-show="myForm.mobile.$error.minlength"> Minimum length must be 10 </p>
+						</div>
+					</td>	
+				</tr>
 
-		<tr>
-			<td><b>Date Of Birth</b></td>
-			<td>
-				<input type="text" ng-model="patient_record.dob" name="dob" required/>
-				<p ng-show="myForm.dob.$invalid">DOB is required.</p>	
-			</td>	
-		</tr>
+				<tr>
+					<td><b>Alternate Mobile</b></td>
+					<td>
+						<input type="text" ng-model="patient.alternate_mobile" name="alternate_mobile" minlength="10" maxlength="10" required="" ng-pattern="/[0-9]$/" class="form-control"/>
+						<div ng-show="myForm.$submitted || myForm.alternate_mobile.$touched" class="profile-error">
+							<p ng-show="myForm.alternate_mobile.$error.required">Alternate Mobile required. </p>
+							<p ng-show="myForm.alternate_mobile.$error.minlength"> Minimum length must be 10 </p>
+							<p ng-show="myForm.mobile.$error.pattern"> Only Numbers allowed </p>
+						</div>
+					</td>	
+				</tr>
 
-		<tr>
-			<td><b>Mobile</b></td>
-			<td>
-				<input type="text" ng-model="patient_record.mobile" name="mobile" required/>
-				<p ng-show="myForm.mobile.$invalid">Mobile is Required</p>
+				<tr>
+					<td><b>Address</b></td>
+					<td>
+						<textarea type="text" ng-model="patient.address" name="address" required="" ng-pattern="/[a-zA-Z0-9 ]$/" class="form-control"/>
+						<div ng-show="myForm.$submitted || myForm.address.$touched" class="profile-error">
+							<p ng-show="myForm.address.$error.required">Address required </p>
+							<p ng-show="myForm.address.$error.pattern">No Special Characters Allowed</p>
+						</div>
+					</td>	
+				</tr>
 
-			</td>	
-		</tr>
+				<tr>
+					<td><b>City</b></td>
+					<td>
+						<select name="city" ng-model="patient.city" required="" class="form-control">
+							<option value="">Select</option>
+							<option value="Indore">Indore</option>
+							<option value="Bhopal">Bhopal</option>
+							<option value="Ujjian">Ujjain</option>
+							<option value="Rewa">Rewa</option>
+							<option value="Satna">Satna</option>
+							<option value="Neemuch">Neemuch</option>
+						</select>
+						<div ng-show="myForm.$submitted || myForm.city.$touched" class="profile-error">
+							<p ng-show="myForm.city.$error.required">Select City</p>
+						</div>
+					</td>	
+				</tr>
 
-		<tr>
-			<td><b>Alternate Mobile</b></td>
-			<td>
-				<input type="text" ng-model="patient_record.alternate_mobile" name="alternate_mobile" required/>
-			</td>	
-		</tr>
+				<tr>
+					<td><b>State</td>
+					<td>
+						<select name="state" ng-model="patient.state" required="" class="form-control">
+							<option value="">Select</option>
+							<option value="Madhya Pradesh">Madhya Pradesh</option>
+							<option value="Uttar Pradesh">Uttar Pradesh</option>
+							<option value="Punjab">Punjab</option>
+							<option value="Hariyana">Hariyana</option>
+							<option value="J&K">J&K</option>
+							<option value="Karnataka">Karnataka</option>
+						</select>
+						<div ng-show="myForm.$submitted || myForm.city.$touched" class="profile-error">
+							<p ng-show="myForm.state.$invalid">Select State</p>
+						</div>
+					</td>	
+				</tr>
+				
+				<tr>
+					<td><b>Country</b></td>
+					<td>
+						<select name="country" ng-model="patient.country" required="" class="form-control">
+							<option value="">Select</option>
+							<option value="India">India</option>
+						</select>	
+						<div ng-show="myForm.$submitted || myForm.country.$touched" class="profile-error">
+							<p ng-show="myForm.country.$invalid">Select Country</p>
+						</div>
+					</td>	
+				</tr>
 
-		<tr>
-			<td><b>Address</b></td>
-			<td>
-				<input type="text" ng-model="patient_record.address" name="address" required/>
-				<p ng-show="myForm.address.$invalid">Address is Required</p>					
-			</td>	
-		</tr>
+				<tr>
+					<td><b>Pincode</b></td>
+					<td>
+						<input type="text" ng-model="patient.pincode" name="pincode" required="" ng-pattern="/[0-9 ]$/" class="form-control"/> 
+						<div ng-show="myForm.$submitted || myForm.pincode.$touched" class="profile-error">
+							<p ng-show="myForm.pincode.$invalid">Pincode Required</p>
+							<p ng-show="myForm.pincode.pattern">Only Numebers Allowed</p>
+						</div>
+					</td>	
+				</tr>
+				
+				<tr>
+					<td></td>
+					<td>
+						<input type="submit" class="btn btn-primary" value="Update Profile" ng-click="updatePatientRec(patient, myForm)"/>
+					</td>
+				</tr>
 
-		<tr>
-			<td><b>Locality</b></td>
-			<td>
-				<input type="text" ng-model="patient_record.locality" name="locality" required/>
-				<p ng-show="myForm.locality.$invalid">Locality is Required</p>	
-			</td>	
-		</tr>
-
-		<tr>
-			<td><b>City</b></td>
-			<td>
-				<input type="text" ng-model="patient_record.city" name="city" required/>
-				<p ng-show="myForm.city.$invalid">city is Required</p>	
-			</td>	
-		</tr>
-
-		<tr>
-			<td><b>State</td>
-			<td>
-				<input type="text" ng-model="patient_record.state" name="state" required/>
-				<p ng-show="myForm.state.$invalid">State is Required</p>	
-			</td>	
-		</tr>
-		
-		<tr>
-			<td><b>Country</b></td>
-			<td>
-				<input type="text" ng-model="patient_record.country" name="country" required/>
-				<p ng-show="myForm.country.$invalid">country is Required</p>	
-			</td>	
-		</tr>
-
-		<tr>
-			<td><b>Pincode</b></td>
-			<td>
-				<input type="text" ng-model="patient_record.pincode" name="pincode" required/> 
-				<p ng-show="myForm.pincode.$invalid">Pincode is Required</p>	
-			</td>	
-		</tr>
-
-		
-		<tr>	
-			<td colspan="2"><hr></td>
-		</tr>
-
-		<tr>
-			<td></td>
-			<td>
-				<input type="submit" value="Update Profile" ng-click="updatePatientRec(patient_record)"/>
-			</td>
-		</tr>
-
-
-	</table>
-</form>
+			</table>
+		</form>
+	</div>
+	<div class="col-md-3"></div>
+</div>

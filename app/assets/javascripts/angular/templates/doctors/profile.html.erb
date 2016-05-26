@@ -1,120 +1,237 @@
-<div class="table-responsive">
+<div class="panel">
+	<div class="row">
+		<div class="col-md-5">
+			<form name="myForm">
+				<table ng-init="showtextbox = true" align="center">
+					<tr>	
+						<td colspan="2"><center><h2>Profile</h2></center><br> </td>
+					</tr>
 
-	<form name="myForm">
+					<tr>	
+						<td width="200"><strong>Name</strong></td>
+						<td>
+							<input type="text" class="form-control profile-txtbox" ng-model="doctor.name" name="name" required="" ng-disabled="showtextbox" ng-pattern="/[a-zA-Z]$/" /> 
+							<div class="profile-error" ng-show="myForm.$submitted || myForm.name.$touched">
+								<p ng-show="myForm.name.$error.pattern" class="profile-error"> Only Aplphabates Allowed</p>
+								<p ng-show="myForm.name.$error.required" class="profile-error">Name is required.</p>
+							</div>
+						</td>	
+					</tr>
+					
+					<tr height="5"></tr>
+					
+					<tr>
+						<td><strong>Gender</strong></td>
+						<td>
+							<lable class="radio-inline">
+								<input type="radio" name="gender" value="Male" ng-model="doctor.gender" required="" ng-disabled="showtextbox" />Male<br>
+								<input type="radio" name="gender" value="Female" ng-model="doctor.gender" ng-disabled="showtextbox"/>Female
+							</lable>
+							<div class="profile-error" ng-show="myForm.$submitted || myForm.gender.$touched">
+								<p ng-show="myForm.gender.$error.required" class="profile-error">Gender is required.</p>
+							</div>
+						</td>	
+					</tr>
+					
+					<tr height="5"></tr>
+					
+					<tr>
+						<td><strong>Date Of Birth</strong></td>
+						<td>
+							<input type="text" name="dob" data-provide="datepicker" data-date-format="dd/mm/yyyy" data-date-start-date="-70y" data-date-end-date="-26y" class="form-control profile-txtbox" ng-model="doctor.dob" name="dob" required=""  ng-disabled="showtextbox"/>
+							<div class="profile-error" ng-show="myForm.$submitted || myForm.dob.$touched">
+								<p ng-show="myForm.dob.$error.required" class="profile-error">Date Of Birth is required.</p>
+							</div>
+						</td>	
+					</tr>
+					
+					<tr height="5"></tr>
+					
+					<tr>
+						<td><strong>Mobile</strong></td>
+						<td>
+							<input type="text" class="form-control profile-txtbox" ng-model="doctor.mobile" name="mobile" required="" ng-disabled="showtextbox" minlength="10" maxlength="10" ng-pattern="/[0-9]$/"/>			
+							<div class="profile-error" ng-show="myForm.$submitted || myForm.mobile.$touched">
+								<p ng-show="myForm.mobile.$error.required" class="profile-error">Mobile is required.</p>
+								<p ng-show="myForm.mobile.$error.pattern" class="profile-error"> Only Numbers Allowed</p>
+							</div>
+						</td>	
+					</tr>
 
-		<table align="center" ng-init="showtextbox = true">
-			<tr>	
-				<td colspan="2"><center><h2><strong>Profile</strong></h2></center> </td><br>
-			</tr>
+					<tr height="5"></tr>
 
-			<tr>	
-				<td width="200"><strong>Name</strong></td>
-				<td>
-					<input type="text" class="profile-txtbox" ng-model="doctor_record.name" name="name" required="" ng-disabled="showtextbox"/> 
-					<p ng-show="myForm.name.$invalid" >Name is required.</p>
-				</td>	
-			</tr>
-			
-			<tr>
-				<td><strong>Email</strong></td>
-				<td>
-					<input type="email" class="profile-txtbox" ng-model="doctor_record.email" name="email" required="" ng-disabled="showtextbox"/>
-					<p ng-show="myForm.email.$invalid" >Email is required.</p>
-				</td>	
-			</tr>
+					<tr>
+						<td><strong>Alternate Mobile</strong></td>
+						<td>
+							<input type="text" class="form-control profile-txtbox" ng-model="doctor.alternate_mobile" name="alternatemobile" required="" ng-disabled="showtextbox" minlength="10" maxlength="10" ng-pattern="/[0-9]$/"/>	
+							<div class="profile-error" ng-show="myForm.$submitted || myForm.alternatemobile.$touched">
+								<p ng-show="myForm.alternatemobile.$error.required" class="profile-error">Alternate Mobile is required.</p>		
+								<p ng-show="myForm.alternatemobile.$error.pattern" class="profile-error"> Only Numbers Allowed</p>
+							</div>
+						</td>	
+					</tr>
 
-			<tr>
-				<td><strong>Gender</strong></td>
-				<td>
-					<input type="text" class="profile-txtbox" ng-model="doctor_record.gender" name="gender" required="" ng-disabled="showtextbox"/>			
-					<p ng-show="myForm.gender.$invalid" >Gender is required.</p>
-				</td>	
-			</tr>
+					<tr height="5"></tr>
 
-			<tr>
-				<td><strong>Date Of Birth</strong></td>
-				<td>
-					<input type="text" class="profile-txtbox" ng-model="doctor_record.dob" name="dob" required=""  ng-disabled="showtextbox"/>
-					<p ng-show="myForm.dob.$invalid" >Date Of Birth is required.</p>
-				</td>	
-			</tr>
+					<tr>
+						<td><strong>Address</strong></td>
+						<td>
+							<input type="text" class="form-control profile-txtbox" ng-model="doctor.address" name="address" required="" ng-disabled="showtextbox" ng-pattern="/[a-zA-Z0-9 ]$/"/>			
+							<div class="profile-error" ng-show="myForm.$submitted || myForm.address.$touched">
+								<p ng-show="myForm.address.$error.required" class="profile-error">Address is required.</p>		
+								<p ng-show="myForm.address.$error.pattern" class="profile-error">No Special Characters Allowed</p>		
+							</div>
+						</td>	
+					</tr>
+					
+					<tr height="5"></tr>
+					
+					<tr>
+						<td><strong>City</strong></td>
+						<td>
+							<select class="form-control profile-txtbox" name="city" ng-model="doctor.city" required="" ng-disabled="showtextbox">
+								<option value="">Select</option>
+								<option value="Indore">Indore</option>
+								<option value="Bhopal">Bhopal</option>
+								<option value="Ujjian">Ujjain</option>
+								<option value="Rewa">Rewa</option>
+								<option value="Satna">Satna</option>
+								<option value="Neemuch">Neemuch</option>
+							</select>
+							<div class="profile-error" ng-show="myForm.$submitted || myForm.city.$touched">
+								<p ng-show="myForm.city.$error.required" class="profile-error"> City is Required </p>		
+							</div>
+						</td>	
+					</tr>
+					
+					<tr height="5"></tr>
+					
+					<tr>
+						<td><strong>State</strong></td>
+						<td>	
+							<select name="state" class="form-control profile-txtbox" ng-model="doctor.state" required="" ng-disabled="showtextbox">
+								<option value="">Select</option>
+								<option value="Madhya Pradesh">Madhya Pradesh</option>
+								<option value="Uttar Pradesh">Uttar Pradesh</option>
+								<option value="Punjab">Punjab</option>
+								<option value="Hariyana">Hariyana</option>
+								<option value="J&K">J&K</option>
+								<option value="Karnataka">Karnataka</option>
+							</select>
+							<div class="profile-error" ng-show="myForm.$submitted || myForm.city.$touched">
+								<p ng-show="myForm.state.$error.required" class="profile-error"> State is Required </p>	
+							</div>
+						</td>	
+					</tr>
+					
+					<tr height="5"></tr>
+					
+					<tr>
+						<td><strong>Country</strong></td>
+						<td>
+							<select name="country" class="form-control profile-txtbox" ng-model="doctor.country" required="" ng-disabled="showtextbox">
+								<option value="">Select</option>
+								<option value="India">India</option>
+							</select>	
+							<div class="profile-error" ng-show="myForm.$submitted || myForm.country.$touched">
+								<p ng-show="myForm.country.$error.required" class="profile-error"> Country is Required </p>	
+							</div>
+						</td>	
+					</tr>
+					
+					<tr height="5"></tr>
+					
+					<tr>
+						<td><strong>Pincode</strong></td>
+						<td>
+							<input type="text" class="form-control profile-txtbox" class="profile-txtbox" ng-model="doctor.pincode" name="pincode" required="" ng-disabled="showtextbox" ng-pattern="/[0-9]$/"/>	
+							<div class="profile-error" ng-show="myForm.$submitted || myForm.pincode.$touched">
+								<p ng-show="myForm.pincode.$error.required" class="profile-error"> Pincode is Required </p>		
+								<p ng-show="myForm.pincode.$error.pattern" class="profile-error"> Only Numbers allowed </p>
+							</div>
+						</td>	
+					</tr>
+					
+					<tr height="5"></tr>
+					
+					<tr>
+						<td></td>
+						<td>
+						<br>
+							<a href="" ng-click="showtextbox = !showtextbox">Edit Profile</a>
+							<input type="submit" value="Update Profile" class="btn btn-primary btn-md" ng-click="docUpdateRec(doctor, myForm)" ng-disabled="showtextbox" />
+						</td>
+					</tr>
 
-			<tr>
-				<td><strong>Mobile</strong></td>
-				<td>
-					<input type="text" class="profile-txtbox" ng-model="doctor_record.mobile" name="mobile" required="" ng-disabled="showtextbox"/>			
-					<p ng-show="myForm.mobile.$invalid" >Mobile is required.</p>
-				</td>	
-			</tr>
+				</table>
+			</form>
+		</div>
 
-			<tr>
-				<td><strong>Alternate Mobile</strong></td>
-				<td>
-					<input type="text" class="profile-txtbox" ng-model="doctor_record.alternate_mobile" name="alternatemobile" required="" ng-disabled="showtextbox"/>	
-					<p ng-show="myForm.alternatemobile.$invalid" >Alternate Mobile is required.</p>		
-				</td>	
-			</tr>
 
-			<tr>
-				<td><strong>Address</strong></td>
-				<td>
-					<input type="text" class="profile-txtbox" ng-model="doctor_record.address" name="address" required="" ng-disabled="showtextbox"/>			
-					<p ng-show="myForm.address.$invalid" >Address is required.</p>		
-				</td>	
-			</tr>
+		<div class="col-md-7">
+			<form name="proessionFrom" ng-submit="addProfession(professionFields, proessionFrom)">
+				
+				<center><h2>Add Profession</h2></center><br>
+				
+				<table cellspacing="5" cellpadding="5" align="center" class="table">
+					<tr ng-repeat="professionField in professionFields">
+						
+						<td width="200">
+							<select name="speciality{{$index}}" ng-model="selected[$index]" ng-options="obj.name as obj.name for obj in availableOptions | customFilter:selected:selected[$index]" ng-change="professionField.speciality = selected[$index]" class="form-control" required="">
+								<option value="">Select Speciality</option>
+							</select>
+							<div class="profile-error" ng-show="proessionFrom.$submitted || proessionFrom.speciality{{$index}}.$touched">
+								<p ng-show="proessionFrom.speciality{{$index}}.$error.required">Select Speciality</p>
+							</div>
+						</td>
+						
+						<td width="200">
+							<select name="experience{{$index}}" ng-model="professionField.experience" required="" class="form-control">
+								<option value="">Select Experience</option>
+								<option ng-repeat="exp in forExperience track by $index" value="{{$index+1}}">{{$index+1}} Year</option>
+							</select>
+							
+							<div class="profile-error" ng-show="proessionFrom.$submitted || proessionFrom.experience{{$index}}.$touched">
+								<p ng-show="proessionFrom.experience{{$index}}.$error.required">Select Experience</p>
+							</div>
+						</td>
+						
+						<td width="200">
+							<input type="text" name="fee{{$index}}" ng-model="professionField.fee" required="" ng-pattern="/[0-9]$/" class="form-control" placeholder="Charges (Rupees)"/>
+							
+							<div class="profile-error" ng-show="proessionFrom.$submitted || proessionFrom.fee{{$index}}.$touched">
+								<p ng-show="proessionFrom.fee{{$index}}.required">Can not be empty</p>
+								<p ng-show="proessionFrom.fee{{$index}}.$error.pattern">Only Numbers Allowed</p>
+							</div>
+						</td>
+					
+						<td>
+							<a href="" ng-hide="$index == 0" ng-click="removeProfessionTextBox($index)">(-) Remove</a>
+						</td>
+						
+						<td colspan="" class="profile-error">{{professionMsgs[$index]}}</td>
+					</tr>
+					
+					<tr>
+						<td><a href="" ng-hide="availableOptions.length == professionFields.length" ng-click="addProfessionTextBox()">(+) Add</a></td>
+						<td colspan="3"></td>
+					</tr>
+					
+					<tr>
+						<td colspan="4"><center><button type="submit" class="btn btn-primary" ng-click="">Submit</button>
+						</center></td>
+					</tr>
+				</table>
+			</form>
+		</div>
+	</div>	
 
-			<tr>
-				<td><strong>Locality</strong></td>
-				<td>
-					<input type="text" class="profile-txtbox" ng-model="doctor_record.locality" name="locality" required="" ng-disabled="showtextbox"/>	
-					<p ng-show="myForm.locality.$invalid"> Locality is Required </p>		
-				</td>	
-			</tr>
-
-			<tr>
-				<td><strong>City</strong></td>
-				<td>
-					<input type="text" class="profile-txtbox" ng-model="doctor_record.city" name="city" required="" ng-disabled="showtextbox"/>	
-					<p ng-show="myForm.city.$invalid"> City is Required </p>		
-				</td>	
-			</tr>
-
-			<tr>
-				<td><strong>State</strong></td>
-				<td>
-					<input type="text" class="profile-txtbox" ng-model="doctor_record.state" name="state" required="" ng-disabled="showtextbox"/>
-					<p ng-show="myForm.state.$invalid"> State is Required </p>	
-				</td>	
-			</tr>
-			
-			<tr>
-				<td><strong>Country</strong></td>
-				<td>
-					<input type="text" class="profile-txtbox" ng-model="doctor_record.country" name="country" required="" ng-disabled="showtextbox"/>			
-					<p ng-show="myForm.country.$invalid"> Country is Required </p>	
-				</td>	
-			</tr>
-
-			<tr>
-				<td><strong>Pincode</strong></td>
-				<td>
-					<input type="text" class="profile-txtbox" ng-model="doctor_record.pincode" name="pincode" required="" ng-disabled="showtextbox"/>	
-					<p ng-show="myForm.pincode.$invalid"> Pincode is Required </p>		
-				</td>	
-			</tr>
-			<tr>
-				<td></td>
-				<td>
-				<br>
-					<a href="" ng-click="showtextbox = !showtextbox">Edit Profile</a>
-					<input type="submit" value="Update Profile" ng-click="docUpdateRec(doctor_record, myForm)" ng-disabled="showtextbox" />{{}}
-					<!-- <a href="/patients/{{doctor_record.id}}/edit">Edit Profile</a> <br> -->
-				</td>
-			</tr>
-
-		</table>
-
-	</form>
-
+	
+	<div class="row">
+		<div class="col-md-3"></div>
+		<div class="col-md-6">
+			<span professions-info></span>
+		</div>
+		<div class="col-md-3"></div>
+	</div>
 </div>
-

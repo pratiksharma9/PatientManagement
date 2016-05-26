@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html ng-app="PatientManagement">
- <html>
 	<head>
 		<title>PatientManagement</title>
 		<%= stylesheet_link_tag    'application', media: 'all' %>
@@ -11,13 +10,16 @@
 	
 	<body>	
 		
-		<div class="header">
+		<div class="header" id="">
 			 <%= render "layouts/menu"%>
 		</div>
 
-		<div class="flasherror">
-			<center><p class="notice"><%= notice %></p>
-			<p class="alert"><%= alert %></p></center>
+		<div id="message">
+			<center>
+				<p class="notice"><%= notice %></p>
+				<p class="alert"><%= alert %></p>
+				<p class="danger"><%= alert %></p>
+			</center>
 		</div>
 		
 		<div class="content">
@@ -30,11 +32,6 @@
 				</div>
 			</div>
 		</div>
-		
 
-		<div class="footer" >
-			
-		</div>	 
-       
 	</body>
 </html>

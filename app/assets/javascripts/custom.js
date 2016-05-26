@@ -1,1 +1,3 @@
-$('.pickdateindex').datepicker({format: 'dd-mm-yyyy'});
+$(document).ready(function(){
+	setTimeout("$('#message').fadeOut('slow')", 3000)
+});

@@ -5,7 +5,7 @@ controllers.controller('FeedbackCtrl', ['$scope', 'Feedback', '$location', '$rou
 	if($location.path() == "/feedbacks")
 	{
 		Feedback.query(function(data){
-			$scope.doctor_feedbacks = data;
+			$scope.feedbacks = data;
 		});
 	}
 

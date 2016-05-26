@@ -1,13 +1,11 @@
 class Profession < ActiveRecord::Base
 
-	# Rolify
-	resourcify
-	
-	# Validations
-	validates :fee, 
-  			  	numericality: {only_integer: true}
-  			 
 	# Association
 	belongs_to :user
 
+	# Validations
+	validates :experience, presence: true
+	validates :fee, numericality: {only_integer: true}
+  validates :speciality, uniqueness:{ scope: :user_id } 
+  			 
 end

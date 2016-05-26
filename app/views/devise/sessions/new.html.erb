@@ -1,25 +1,32 @@
 <table cellspacing="5" cellpadding="5" align="center">
 	
 	<tr>
-		<td colspan="2"><center><h2>Log In</h2></center></td>
-		<%=devise_error_messages!%>
+		<td colspan="2">
+			<center><h2>Log In</h2></center>
+		</td>
 	</tr>
 	
-	<%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+	<%= form_for(resource, as: resource_name, url: session_path(resource_name), html: {id: "new_login_user"}) do |f| %>
 	<div class="field">
 		<tr>
-			<td><%= f.label :email %></td>
-			<td><%= f.email_field :email, autofocus: true %></td>
+			<td width="100"><%= f.label :email %></td>
+			<td width="230">
+				<%= f.email_field :email, class: "form-control", id: "user_login_email"%>
+				<p id="user_login_email_error" class="sign-up-error"></p>	
+			</td>
 		</tr>
 	</div>
-
+	<tr height="3"></tr>
 	<div class="field">
 		<tr>
 			<td><%= f.label :password %></td>
-			<td><%= f.password_field :password, autocomplete: "off" %></td>
+			<td>
+				<%= f.password_field :password, autocomplete: "off", class: "form-control", id: "user_login_password"%>
+				<p id="user_login_password_error" class="sign-up-error"></p>
+			</td>
 		</tr>
 	</div>
-
+	<tr height="3"></tr>
 	<% if devise_mapping.rememberable? -%>
 		<div class="field">
 			<tr>
@@ -34,7 +41,7 @@
 
 	<div class="actions">
 		<tr>
-			<td colspan="2"><p class="pull-right"><%= f.submit "Log in" %></p></td>
+			<td colspan="2"><p ><%= f.submit "Log in", class: "btn btn-primary btn-block"%></p></td>
 		</tr>
 		</div>
 	<% end %>

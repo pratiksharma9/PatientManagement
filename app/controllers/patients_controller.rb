@@ -1,63 +1,44 @@
 class PatientsController < ApplicationController
 	respond_to :html, :json
-
-	#bulk
-	def index
-		respond_with do |format|
-			format.json {render :json => {success: true}}
-			format.html
-		end
+	
+	def edit 
+		# view reserved for profile
 	end
 	
-	#bulk
-	def new
-		
-	end
-	
-	#bulk
-	def create
-	
-	end
-	
-	#ids
-	def edit
-		# reserved for edit Profile
-	end
-	
-	#ids
 	def show
-		@patientdata = User.find(params[:id])
-		respond_with(@patientdata.as_json)
+	
+		if (User.exists?(params[:id])) && (current_user.id == params[:id].to_i)
+			@patientdata = User.find(params[:id])
+			respond_with(@patientdata.as_json)
+		else
+			respond_with({msg: "Profile Not Found", id: current_user.id})
+		end
+		
 	end
 	
-	#ids
 	def update
-		
-		@updated = User.update(params[:id], permit_for_update)
-
-		if(@updated.save)
-			message = true;		
-		else
-		 	message = false;
+		if(User.exists?(params[:id])) && (current_user.id == params[:id].to_i)
+			
+			@updated = User.update(params[:id], permit_for_update)
+			
+			if(@updated.save)
+				msg = true;
+			else
+				msg = false;
+			end
+			
 		end
 
-		respond_to do |format|
-		 	format.json { render json: {success: message} }
+		respond_with do |format|
+		 	format.json { render json: {success: msg} }
 		 	format.html
-		 end
-
+		end
+		
 	end
 	
-	#ids
-	def destroy
-	
-	end
-
-	# User Define Methods
 	private
 	def permit_for_update
-		params[:patient].permit(:name, :email, :gender, :dob, :mobile, :alternate_mobile, :address, :locality, :city, :state, :country, :pincode)
+		params[:patient].permit(:name, :gender, :dob, :mobile, :alternate_mobile, :address, :city, :state, :country, :pincode)
 	end
 
-	
 end

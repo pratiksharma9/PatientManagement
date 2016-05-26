@@ -2,8 +2,8 @@ Rails.application.routes.draw do
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
-  # You can have the root of your site routed with "root"
-  #root 'home#index'
+	# You can have the root of your site routed with "root"
+  # root 'home#index'
 
   devise_scope :user do
     root :to => 'devise/sessions#new'
@@ -13,17 +13,13 @@ Rails.application.routes.draw do
       sessions: 'users/sessions',
      :registrations => 'users/registrations' 
   }
- 
-  # root 'homes#index'
-  # post '*path' => 'homes#index'
- 
 
-  resources :admins
-  resources :patients
-  resources :homes
-  resources :feedbacks
+  resources :patients, only: [:edit, :show, :update]
+  resources :feedbacks, only: [:index, :create, :update, :destroy]
+  resources :appointments, only: [:index, :update]
+  resources :professions, only: [:create, :update, :destroy]
 
-  # Example of regular route:
+	# Example of regular route:
   # get '/doctors/profile/:id', to: 'doctors#doctor_profile'
 
   # Example of named route that can be invoked with purchase_url(id: product.id)
@@ -33,17 +29,11 @@ Rails.application.routes.draw do
   #   resources :products
 
   # Example resource route with options:
-    resources :doctors do
-      member do
-        get 'profile'
-      end
-    end
-  
-    resources :appointments do
-      collection do
-        get 'search'
-      end
-    end
+	resources :doctors, only: [:index, :show, :update] do 
+		member do
+			get 'profile'
+		end
+  end
 
   # Example resource route with sub-resources:
   #   resources :products do
@@ -72,4 +62,6 @@ Rails.application.routes.draw do
   #     # (app/controllers/admin/products_controller.rb)
   #     resources :products
   #   end
+  
+  get '*path' => redirect('/')
 end

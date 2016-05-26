@@ -14,6 +14,7 @@
 //= require jquery_ujs
 //= require twitter/bootstrap
 //= require bootstrap-datepicker
+//= require bootstrap-timepicker
 //= require angular 
 //= require angular-route
 //= require angular-resource
@@ -22,4 +23,4 @@
 //= require_tree ./angular/templates
 //= require_tree ./angular/services 
 //= require_tree ./angular/controllers
-//= require custom
+//= require_tree

@@ -1,52 +1,40 @@
-<table class="table" ng-if="allAppointments.message == 'ForDoctor'">
+<table class="table table-bordered">
 	<tr>
 		<th ng-click="type = 'id'; sort = !sort" >Appointment Id</th>
 		<th>Your Name</th>
 		<th>Patient Name</th>
-		<th>Appointment Date</th>
+		<th ng-click="type = 'patient_date'; sort = !sort">Appointment Date</th>
 		<th>Appointment Time</th>
 		<th>Action</th>
 		<th ng-click="type = 'status'; sort = !sort">Status</th>
 	</tr>
 
-	<tr ng-repeat="appointment in allAppointments.record  | orderBy:'-id' | orderBy:type:sort ">
+	<tr ng-repeat="appointment in appointments | orderBy:'-patient_date' | orderBy:type:sort ">
 		<td>{{appointment.id}}</td>
 		<td><a href="doctors/{{appointment.doctor.id}}/profile">Dr. {{appointment.doctor.name}}</a></td>
 		<td>{{appointment.patient.name}}</td>
 		<td>{{appointment.patient_date}}</td>
-		<td>
+		
+		<td width="300">
+			<span>{{appointment.doctor_confirm_time}}</span>
 			
-			<a href="#" ng-if="appointment.doctor_confirm_time == null && appointment.status != 'Canceled'" ng-click="showbox($index)">Confirm Appointment </a>
+			<span ng-if="(currentDate | date: 'yyyy-MM-dd') < appointment.patient_date">
+				<a href="#" ng-if="appointment.doctor_confirm_time == null && appointment.status != 'Canceled'" ng-click="showbox($index)">Confirm Appointment </a>
+				<a href="#" ng-if="appointment.doctor_confirm_time" ng-click="showbox($index)">| Edit</a>
 			
-			{{appointment.doctor_confirm_time}}
-			<a href="#" ng-if="appointment.doctor_confirm_time" ng-click="showbox($index)">| Edit</a>
-
-			<br>
-			<select ng-show="showbox[$index]" ng-model="time" required="">
-					<option value="10:00 AM">10:00 AM</option>
-					<option value="11:00 AM">11:00 AM</option>
-					<option value="12:00 PM">12:00 PM</option>
-					<option value="01:00 PM">01:00 PM</option>
-					<option value="02:00 PM">02:00 PM</option>
-					<option value="03:00 PM">03:00 PM</option>
-					<option value="04:00 PM">04:00 PM</option>
-					<option value="05:00 PM">05:00 PM</option>
-					<option value="06:00 PM">06:00 PM</option>
-					<option value="07:00 PM">07:00 PM</option>
-					<option value="08:00 PM">08:00 PM</option>
-			</select>
-
-			<input type="submit" ng-show="showbox[$index]" ng-click="appointmentConfirmByDoctor(appointment.id, time)" ng-hide="true" value="Update" />
-			
+				<form name="timeForm" ng-submit="appointmentConfirmByDoctor(appointment.id, time, appointment.patient_date)">
+					<input type="text" class="form-control" ng-show="showbox[$index]"  placeholder="Select Time" required="" ng-model="time" data-provide="timepicker" data-show-meridian="false" data-max-hours="24" data-template="false"/>
+					<input type="submit" ng-show="showbox[$index]" class="btn btn-primary pull-right" ng-hide="true" value="Update" />
+				</form>
+			</span>
 		</td>
 				
 		<td> 
-		   <a href="#" ng-click="cancelByDoctor(appointment.id)" ng-if="appointment.status != 'Canceled'">Cancel</a> 
-			
+		  <a href="#" ng-hide="hideOnComplete(time, appointment.patient_date, $index)" ng-click="cancelByDoctor(appointment.id)" ng-if="appointment.status != 'Canceled' && (currentDate | date: 'yyyy-MM-dd') < appointment.patient_date" >Cancel</a> 
 		</td>
 
 		<td ng-style="appointment.status == 'Canceled' ? {'color': 'red'} : (appointment.status == 'Pending' ? {'color': 'blue'} : {'color': 'green'})" >
-		{{appointment.status}}</td>
+			{{appointment.status}}
+		</td>
 	</tr>
-
 </table>

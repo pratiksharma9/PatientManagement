@@ -6,6 +6,7 @@
 .profile-txtbox:disabled
 {
 	border: none;
+	outline: none;
 	background: transparent;
 }
 
@@ -19,4 +20,19 @@
 .basic-attribute-overflow
 {
 	overflow: auto;
+}
+
+.sign-up-error
+{
+	color: red;
+}
+
+.profile-error
+{
+	color: red;
+}
+
+.cursor-prop
+{
+	cursor: pointer;
 }
