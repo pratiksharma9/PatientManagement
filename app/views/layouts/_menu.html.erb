@@ -4,7 +4,7 @@
 		<% if current_user.has_role? "Doctor" %>
 			<li><%= link_to "Profile", profile_doctor_path(current_user.id)%></li>
 			<li><%= link_to "Appointments", appointments_path %></li>
-			<li><%= link_to "Change Password", edit_user_registration_path, method: :get %></li>
+			<li><%= link_to "Change Password", edit_user_registration_path, method: :get%></li>
 			<li><%= link_to "Feedbacks", feedbacks_path %></li>
 
 		<% elsif current_user.has_role? "Patient" %>

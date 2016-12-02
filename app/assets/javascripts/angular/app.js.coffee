@@ -11,13 +11,14 @@
 	'feedback_services',
 	'doctor_services',
 	'appointment_services',
-	'patient_services'
+	'patient_services',
+	'profession_services',
+
+	'doctor_directives'
 ])
 
 @patient_management.config(['$httpProvider' , ($httpProvider)-> 
 	$httpProvider.defaults.headers.common['X-CSRF-Token'] = $('meta[name=csrf-token]').attr('content') ])  
- 
-
 
 @patient_management.config(['$routeProvider', '$locationProvider', ($routeProvider, $locationProvider) ->
       
@@ -39,7 +40,4 @@
 
 	$locationProvider.html5Mode(true);
 ])
-
-@patient_management.run( -> 
-	console.log 'angular app running' )
 

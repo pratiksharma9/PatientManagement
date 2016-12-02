@@ -1,0 +1,37 @@
+<h3><center>Your Professions</center></h3><br>
+      
+<form name="professionForm">
+  <table cellspacing="5" cellpadding="5" align="center" class="table">
+    <tr>
+      <th>Speciality</th>
+      <th>Experience (Years)</th>
+      <th>Fees <p ng-show="professionForm.$submitted" class="profile-error">Only Numbers Allowed</p></th>
+      <th>Action</th>
+    </tr>
+    
+    <tr ng-repeat="profession in professions" ng-init="enableBox[$index] = true">
+      <td>
+        {{profession.speciality}}
+      </td>
+      <td width="150">
+        <select name="experience" ng-model="profession.experience" required="" ng-disabled="enableBox[$index]" class="form-control profile-txtbox" required="">
+          <option value="">Select Experience</option>
+          <option ng-repeat="exp in forExperience track by $index" value="{{$index+1}}">{{$index+1}} Year</option>
+        </select>
+      </td>
+      <td width="200">
+        <input type="" ng-model="profession.fee" placeholder="Provide Fees" name ="fee" ng-hide="enableBox[$index]" class="form-control profile-txtbox" required="" ng-pattern="/[0-9]$/" />
+        <span ng-show="enableBox[$index]">{{profession.fee | currency:'&#8377;'}}</span>
+        <input type="submit" class="btn btn-primary pull-right" ng-hide="enableBox[$index]" ng-init="showBox[$index] = true" ng-click="updateProfession(profession.id, profession, professionForm)" value="Update"/>
+      </td>
+      <td>
+        <a href="" ng-click="enableBox($index)">Edit</a>
+        <a href="" ng-click="deleteProfession(profession.id)">Delete</a>
+      </td>
+    </tr>
+    
+    <tr ng-if="professions == ''">
+      <td colspan="4"><font color="red">No Profession Till Now </font></td>
+    </tr>
+  </table>
+</form>

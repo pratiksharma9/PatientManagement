@@ -1,14 +1,5 @@
 var controllers = angular.module('doctor_controllers', ['ngRoute', 'ngResource']);
 
-controllers.directive('professionsInfo', function(){
-	return {
-		restrict: 'A',
-		templateUrl: function(elem, attr){
-			return 'angular/templates/doctors/professions-info.html'
-		}
-	};
-});
-
 controllers.filter('customFilter', function() {
  return function(input, filterEach, exclude) {
 
@@ -30,7 +21,6 @@ controllers.controller('DoctorsCtrl', ['$scope', 'Doctor', 'Feedback', 'Appointm
 	if ($location.path() == "/doctors/" + id + "/profile")
 	{
 			Doctor.getProfile({id: id}, function(data) {
-				
 				if(data.msg == "Profile Not Found")
 				{
 					$location.path('/doctors/'+data.id+'/profile');
@@ -165,7 +155,13 @@ controllers.controller('DoctorsCtrl', ['$scope', 'Doctor', 'Feedback', 'Appointm
 		$scope.enableBox[$index] = !$scope.enableBox[$index];
 	};
 	
-	$scope.validateSpeciality = function(data){
-			console.log(data);
-	};
+	// $scope.validateSpeciality = function(data){
+	// 		console.log(data);
+	// };
+
+	if($location.path() == "/users/edit") 
+	{
+		$scope.temp = "Hiii";
+	}
 }]);
+
